@@ -36,6 +36,8 @@ app.get('/quote', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`App running on port ${PORT}`);
+app.listen(3000, '0.0.0.0', () => {
+  console.log("Server running on port 3000");
+});
+
 });
