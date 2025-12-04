@@ -1,33 +1,32 @@
-name: Node.js CI
+pipeline {
+    agent any
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    stages {
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/afnantypical/node-app.git'
+            }
+        }
 
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v3
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+        stage('Test') {
+            steps {
+                sh 'echo "No tests available"'
+            }
+        }
 
-      - name: Install dependencies
-        run: npm install
+        stage('Run App') {
+            steps {
+                sh 'npm start &'
+                echo "Node app started on port 3000"
+            }
+        }
 
-      - name: Run tests (optional)
-        run: echo "No tests defined"
-
-      - name: Build (optional)
-        run: echo "No build step"
-
-      - name: Start app (demo)
-        run: |
-          echo "App would start with: npm start"
+    }
+}
