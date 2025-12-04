@@ -4,6 +4,7 @@ const axios = require('axios');
 const app = express();
 const PORT = 3000;
 
+// Home route
 app.get('/', (req, res) => {
     const html = `
         <!DOCTYPE html>
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
     res.send(html);
 });
 
+// Quote route
 app.get('/quote', async (req, res) => {
     try {
         const response = await axios.get('https://programming-quotes-api.herokuapp.com/quotes/random');
@@ -36,8 +38,7 @@ app.get('/quote', async (req, res) => {
     }
 });
 
-app.listen(3000, '0.0.0.0', () => {
-  console.log("Server running on port 3000");
-});
-
+// Start server on port 3000, listening on all network interfaces
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
 });
